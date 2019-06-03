@@ -10,11 +10,11 @@ server.get('/', (req, res) => {
   res.send('API WORKING');
 });
 
-//Post
+//POST 
 server.post('/users', (req, res) => {
     const userInfo = req.body;
     const { name, bio } = req.body;
-    if (!name && !bio ) {
+    if (!name || !bio ) {
       res.status(400).json({ errorMessage: "Please provide name and bio for the user." });
     }
   
@@ -41,6 +41,22 @@ server.get('/users', (req, res) => {
 
 });
 
+//GET User id
+server.get('/users/:id', (req, res) => {
+    const { id } = req.params;
+    db.findById(id)
+    .then(userId => {
+        res.status(200).json(userId)
+    })
+    .catch(err => {
+        res.status(500).json({error: "The users information could not be retrieved." });
+    });
+
+});
+
+
+
+// DELETE
 server.delete('/users/:id', (req, res) => {
     const {id} = req.params
     db.remove(id)
@@ -56,25 +72,14 @@ server.delete('/users/:id', (req, res) => {
       })
 })
 
-// //GET USER ID
-// server.get('/users:id', (req, res) => {
-//     const { id } = req.params;
-//     db.findById(id)
-//     .then(id => {
-//         res.status(200).json(id)
-//     })
-//     .catch(err => {
-//         res.status(500).json({error: "The users information could not be retrieved." });
-//     });
-
-// });
 
 
 
 
 
-server.listen(8000, () => {
-    console.log('API running on port 8000')
+
+server.listen(5000, () => {
+    console.log('API running on port 5000')
 });
 
 
