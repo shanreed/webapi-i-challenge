@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const db = require('./data/db');
 
@@ -22,5 +24,5 @@ server.get('/db', (req, res) => {
 })
 
 server.listen(8000, () => {
-    console.log('API running on port 8000')
+    console.log('API running on port 5000')
 });
