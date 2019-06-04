@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './App.css';
+
 
 class App extends React.Component {
   constructor() {
@@ -8,10 +8,10 @@ class App extends React.Component {
     this.state = {
       users: [],
     };
-  
+  };
 
   componentDidMount() {
-    axios.get('http://localhost:4000/data/seeds/users/')
+    axios.get('http://localhost:5000/users/')
     .then(res => {
       this.setState({users: res.data});
       console.log(this.state.users);
@@ -20,10 +20,23 @@ class App extends React.Component {
       console.log(err);
     });
   }
+  
 
   render() {
     return (
-      
+      <div>
+         <h1>WE GOT USERS!</h1>
+          {this.state.users.map(user => {
+            return (
+              <div>
+                <p>{user.name}</p>
+                <p>{user.bio}</p>
+                <button>Remove</button>
+                </div>
+            );
+          })}
+              
+      </div>
     );
   }
 }
